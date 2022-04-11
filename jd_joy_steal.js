@@ -129,7 +129,7 @@ async function jdJoySteal() {
                 const { lastPage } = $.getFriendsData.page;
                 // console.log('lastPage', lastPage)
 
-                console.log(`\n共 ${lastPage * 20 - 1} 个好友\n`);
+                console.log(`\n共 ${$.getFriendsData.datas.length} 个好友\n`);
                 $.allFriends = [];
                 for (let i = 1; i <= new Array(lastPage).fill('').length; i++) {
                     if ($.visit_friend >= 100 || $.stealFriendCoin * 1 >= 100) {
@@ -348,7 +348,6 @@ function getFriends(currentPage = '1') {
             timeout: 10000
         }
         $.get(options, (err, resp, data) => {
-            console.log(err,data)
             try {
                 if (err) {
                     console.log('\n京东宠汪汪: API查询请求失败 ‼️‼️')
