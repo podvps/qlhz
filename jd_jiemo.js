@@ -1,9 +1,11 @@
 /*
-芥么签到&提现&日常任务
-入口：[微信-芥么小程序]
-6 0,9 * * *
+芥么签到
+入口：[微信-芥么小程序-赚积分]
+微信红包：签到->提现
+芥么豆：阅读图文->阅读视频->订阅活动
+cron "15 9-10 * * *"
 */
-const $ = new Env('京东芥么小程序-签到&提现&日常任务');
+const $ = new Env('京东-芥么小程序-签到');
 const zooFaker = require('./JDJRValidator_Aaron');
 const CryptoJS = require('crypto-js');
 $.get = zooFaker.injectToRequest2($.get.bind($));
@@ -286,7 +288,7 @@ async function duty() {
                             await task("getTaskPostId", {"contentType":"2"})
                             await task("similarContentList", {"postId":$.postId,"from":"Z100000001","pageSize":5,"uuid":uuid})
                             await task("apTaskTimeRecord", {"linkId":linkId,"taskId":vo.id})
-                            await $.wait(17000);
+                            await $.wait(32000);
                             await task("getTaskPostId", {"contentType":"2"})
                             await task("similarContentList", {"postId":$.postId,"from":"Z100000001","pageSize":5,"uuid":uuid})
                             await task('apDoTask', {"linkId":linkId,"taskType":vo.taskType,"taskId":vo.id,"channel":"2","itemId":vo.taskSourceUrl})
@@ -385,6 +387,20 @@ function task(function_id, body) {
                         case 'getTaskPostId':
                             if (data.code === 0) {
                                 $.postId = data.data
+                            } else {
+                                console.log(JSON.stringify(data));
+                            }
+                            break;
+                        case 'apTaskTimeRecord':
+                            if (data.code === 0) {
+                                console.log(`已完成${data.data.userFinishedTimes}个阅读`);
+                            } else {
+                                console.log(JSON.stringify(data));
+                            }
+                            break;
+                        case 'similarContentList':
+                            if (data.code === 0) {
+                                console.log("阅读中...");
                             } else {
                                 console.log(JSON.stringify(data));
                             }
