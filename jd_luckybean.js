@@ -2,7 +2,7 @@
 京东App首页-领金豆-抽金豆
 10 5,17 * * * Sami_jd_SoyBean.js
  */
-const $ = new Env('Sami抽京豆');
+const $ = new Env('京东首页-领京豆-抽京豆');
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
