@@ -9,7 +9,7 @@ const CryptoJS = require('crypto-js');
 $.get = zooFaker.injectToRequest2($.get.bind($));
 $.post = zooFaker.injectToRequest2($.post.bind($));
 const notify = $.isNode() ? require('./sendNotify') : '';
-const{ getUUID, queryString } = require("./utils/commonUtil")
+const{ getUUID, queryString } = require("./commonUtil")
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
